@@ -78,7 +78,7 @@ class RectangularRoom(object):
         """
         self.clean = 0
         self.dirty = 1
-        self.room = [[0 for row in range(width)] for column in range(height)]
+        self.room = [[self.dirty for row in range(height)] for column in range(width)]
 
 
     def cleanTileAtPosition(self, pos):
@@ -89,7 +89,7 @@ class RectangularRoom(object):
 
         pos: a Position
         """
-        self.room[pos.x][pos.y] = self.clean
+        self.room[int(pos.x)][int(pos.y)] = self.clean
 
     def isTileCleaned(self, m, n):
         """
@@ -101,7 +101,7 @@ class RectangularRoom(object):
         n: an integer
         returns: True if (m, n) is cleaned, False otherwise
         """
-        if self.room[m][n] == self.clean:
+        if self.room[n][m] == self.clean:
             return True
         else:
             return False
@@ -123,7 +123,7 @@ class RectangularRoom(object):
         cleanRoom = 0
         for r in range(len(self.room)):
             for c in range(len(self.room[0])):
-                if c == self.clean:
+                if self.room[r][c] == self.clean:
                     cleanRoom += 1
 
         return cleanRoom
@@ -134,9 +134,9 @@ class RectangularRoom(object):
 
         returns: a Position object.
         """
-        x = random.randint(0,len(self.room))
-        y = random.randint(0,len(self.room[0]))
-        return Position(x,y)
+        x = random.randint(0,len(self.room)+1)
+        y = random.randint(0,len(self.room[0])+1)
+        return Position(int(x),int(y))
 
     def isPositionInRoom(self, pos):
         """
@@ -146,7 +146,7 @@ class RectangularRoom(object):
         returns: True if pos is in the room, False otherwise.
         """
         try:
-            self.room[pos.x][pos.y]
+            self.room[int(pos.x)][(pos.y)]
         except:
             return False
 
