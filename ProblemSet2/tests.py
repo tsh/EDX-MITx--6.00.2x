@@ -1,7 +1,4 @@
 from ps2 import RectangularRoom, Position
 
-room = RectangularRoom(4,5)
-print "len: ",len(room.room)
-room.cleanTileAtPosition(Position(1,2))
-print "cleanTiles: ", room.getNumCleanedTiles()
-print "randomPos: ", room.getRandomPosition()
+room = RectangularRoom(5,9)
+assert room.isPositionInRoom(Position(5,9))

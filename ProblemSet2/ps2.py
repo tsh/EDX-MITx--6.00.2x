@@ -152,15 +152,15 @@ class RectangularRoom(object):
         pos: a Position object.
         returns: True if pos is in the room, False otherwise.
         """
-        try:
-            if pos.x >= 0 and pos.y >= 0:
-                x = math.floor(pos.x, 0)
-                y = math.floor(pos.y, 0)
-                self.room[(x, y)]
-        except:
-            return False
 
-        return True
+        if pos.x >= 0 and pos.y >= 0:
+            x = math.floor(pos.x)
+            y = math.floor(pos.y)
+            if (x, y) in self.room:
+                return True
+            else:
+                return False
+
 
 
 class Robot(object):
