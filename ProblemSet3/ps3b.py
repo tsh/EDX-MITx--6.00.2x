@@ -184,7 +184,35 @@ def simulationWithoutDrug(numViruses, maxPop, maxBirthProb, clearProb,
     numTrials: number of simulation runs to execute (an integer)
     """
 
-    # TODO
+    trialResults = []
+    time = []
+    #Start trial
+    for trial in range(numTrials):
+        #create viruses
+        viruses = []
+        for vir in range(numViruses):
+            viruses.append(SimpleVirus(maxBirthProb,clearProb))
+
+        patient = Patient(viruses,maxPop)
+        #array to calculate average viruses count
+        totalViruses = []
+        #run sim
+        for sim in range(300):
+            totalViruses.append(float(patient.update()))
+            time.append(sim)
+
+    pylab.plot(time, totalViruses)
+    pylab.title("SimpleVirus simulation")
+    pylab.legend(('AvgViruses/Time'))
+    pylab.xlabel("Time Steps")
+    pylab.ylabel("Average Virus Population")
+    pylab.show()
+
+    #     averageVirusPop = sum(totalViruses)/len(totalViruses)
+    #     trialResults.append(float(averageVirusPop))
+    # print trialResults
+    # print totalViruses
+
 
 
 
