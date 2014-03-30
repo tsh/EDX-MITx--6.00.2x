@@ -282,7 +282,6 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
     """
     results = []
     for run in range(num_trials):
-        anim = ps2_visualize.RobotVisualization(num_robots, width, height)
         #INIT
         room = RectangularRoom(width, height)
         robots = [] #arr to save robots
@@ -294,20 +293,18 @@ def runSimulation(num_robots, speed, width, height, min_coverage, num_trials,
         roomCoverage = room.getNumCleanedTiles() / room.getNumTiles()
         counter = 0
         #Make robots clean the room
-        while roomCoverage <= min_coverage:
+        while roomCoverage <= float(min_coverage):
             for robo in robots:
-                anim.update(room, robots)
                 robo.updatePositionAndClean()
-            roomCoverage = room.getNumCleanedTiles() / room.getNumTiles()
+            roomCoverage = float(room.getNumCleanedTiles()) / room.getNumTiles()
             counter += 1
         results.append(counter)
-        anim.done()
     #calculate mean
     mean = sum(results) / len(results)
-    return mean
+    return float(mean)
 
 # Uncomment this line to see how much your simulation takes on average
-print  runSimulation(1, 1.0, 10, 10, 0.75, 30, StandardRobot)
+print  runSimulation(1, 1.0, 5, 5, 0.9, 30, StandardRobot)
 
 
 # === Problem 4
@@ -323,7 +320,18 @@ class RandomWalkRobot(Robot):
         Move the robot to a new position and mark the tile it is on as having
         been cleaned.
         """
-        raise NotImplementedError
+        self.direction = random.randint(1,359)
+        newPosition = self.position.getNewPosition(self.direction, self.speed)
+        #if robot hits the wall and newPosition is outside the room:
+        # choose random direction and get new position until it fits in the room
+        while not self.room.isPositionInRoom(newPosition):
+            self.direction = random.randint(1,359)
+            newPosition = self.position.getNewPosition(self.direction, self.speed)
+        #Position is inside the room, set robot here and clean tile
+        self.setRobotPosition(newPosition)
+        self.room.cleanTileAtPosition(newPosition)
+
+#testRobotMovement(RandomWalkRobot, RectangularRoom)
 
 
 def showPlot1(title, x_label, y_label):
@@ -345,6 +353,7 @@ def showPlot1(title, x_label, y_label):
     pylab.ylabel(y_label)
     pylab.show()
 
+#showPlot1("title", "labeX", "labelY")
     
 def showPlot2(title, x_label, y_label):
     """
@@ -367,7 +376,7 @@ def showPlot2(title, x_label, y_label):
     pylab.ylabel(y_label)
     pylab.show()
     
-
+#showPlot2("title","labelX", "labelY")
 # === Problem 5
 #
 # 1) Write a function call to showPlot1 that generates an appropriately-labeled
