@@ -150,7 +150,7 @@ class Patient(object):
         integer)
         """
         for virus in self.viruses:
-            if virus.getClear():
+            if virus.doesClear():
                 self.viruses.remove(virus)
 
         popDensity = self.getTotalPop() / float(self.maxPop)
