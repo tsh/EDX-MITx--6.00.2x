@@ -268,7 +268,7 @@ class ResistantVirus(SimpleVirus):
         otherwise.
         """
         
-        return self.resistances[drug]
+        return self.resistances[drug] if drug in self.resistances else False
 
 
     def reproduce(self, popDensity, activeDrugs):
@@ -318,7 +318,7 @@ class ResistantVirus(SimpleVirus):
         #Check resistance
         canReproduce = True
         for k in activeDrugs:
-            if not self.isResistantTo(activeDrugs[k]):
+            if not self.isResistantTo(k):
                 canReproduce = False
         #reproduce
         if canReproduce and random.random() < self.maxBirthProb * (1 - popDensity):
@@ -328,7 +328,7 @@ class ResistantVirus(SimpleVirus):
                 if random.random() < 1 - self.mutProb:
                     #virus inherited resistance
                     inheritedResitances[k] = True
-            return ResistantVirus(self.maxBirthProb,self.clearProb,inheritedResitances, self.mutProb)
+            return ResistantVirus(self.maxBirthProb,self.clearProb, inheritedResitances, self.mutProb)
 
 
             
