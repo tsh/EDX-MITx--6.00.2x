@@ -186,7 +186,7 @@ def simulationWithoutDrug(numViruses, maxPop, maxBirthProb, clearProb,
 
     trialResults = []
     time = []
-    #Start trial
+    #Start trial grader checks one trial only
     for trial in range(numTrials):
         #create viruses
         viruses = []
@@ -201,6 +201,8 @@ def simulationWithoutDrug(numViruses, maxPop, maxBirthProb, clearProb,
             totalViruses.append(float(patient.update()))
             time.append(sim)
 
+    print totalViruses
+    #plot the values
     pylab.plot(time, totalViruses)
     pylab.title("SimpleVirus simulation")
     pylab.legend(('AvgViruses/Time'))
@@ -208,10 +210,6 @@ def simulationWithoutDrug(numViruses, maxPop, maxBirthProb, clearProb,
     pylab.ylabel("Average Virus Population")
     pylab.show()
 
-    #     averageVirusPop = sum(totalViruses)/len(totalViruses)
-    #     trialResults.append(float(averageVirusPop))
-    # print trialResults
-    # print totalViruses
 
 
 
