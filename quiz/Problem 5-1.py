@@ -23,6 +23,6 @@ def sampleQuizzes():
         score = mid1*0.25 + mid2*0.25 + finalExam*0.5
         if score >= 70 and score <= 75:
             yes += 1
-        return yes
+    return yes / 10000.0
 
 print sampleQuizzes()
