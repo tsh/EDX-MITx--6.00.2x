@@ -35,7 +35,7 @@ def load_map(mapFilename):
     Returns:
         a directed graph representing the map
     """
-    # TODO
+
     print "Loading map from file..."
         
 
@@ -70,7 +70,7 @@ def bruteForceSearch(digraph, start, end, maxTotalDist, maxDistOutdoors):
         If there exists no path that satisfies maxTotalDist and
         maxDistOutdoors constraints, then raises a ValueError.
     """
-    #TODO
+
     pass
 
 #
@@ -101,7 +101,7 @@ def directedDFS(digraph, start, end, maxTotalDist, maxDistOutdoors):
         If there exists no path that satisfies maxTotalDist and
         maxDistOutdoors constraints, then raises a ValueError.
     """
-    #TODO
+
     pass
 
 # Uncomment below when ready to test
